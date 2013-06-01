@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Jasmine Spec Runner</title>
+
+  <link rel="shortcut icon" type="image/png" href="lib/jasmine-1.3.1/jasmine_favicon.png">
+  <link rel="stylesheet" type="text/css" href="lib/jasmine-1.3.1/jasmine.css">
+  <script type="text/javascript" src="lib/jasmine-1.3.1/jasmine.js"></script>
+  <script type="text/javascript" src="lib/jasmine-1.3.1/jasmine-html.js"></script>
+
+	<!-- required libraries -->
+	<script type="text/javascript" src="../../angular/angular.min.js"></script>
+  <script type="text/javascript" src="../../angular/angular-resource.min.js"></script>
+	<script type="text/javascript" src="../../angular/angular-sanitize.min.js"></script>
+	<script type="text/javascript" src="../../angular/angular-mocks.js"></script>
+	<script type="text/javascript" src="../underscore-min.js"></script>
+
+	<!-- include files to be tested here -->
+	<script type="text/javascript" src="../../editor_app.js"></script>
+	<script type="text/javascript" src="../../editor_services.js"></script>
+	<script type="text/javascript" src="../../editor_controllers.js"></script>
+	<script type="text/javascript" src="../../editor_directives.js"></script>
+	<script type="text/javascript" src="../../element_app.js"></script>
+
+  <!-- include spec files here... -->
+  <script type="text/javascript" src="../../tests/spec_helper.js"></script>
+	<script type="text/javascript" src="../../tests/unit/spec_spec.js"></script>
+	<script type="text/javascript" src="../../tests/unit/test_spec.js"></script>
+	<script type="text/javascript" src="../../tests/unit/editor_app_spec.js"></script>
+	<script type="text/javascript" src="../../tests/unit/editor_services_spec.js"></script>
+	<script type="text/javascript" src="../../tests/unit/editor_controllers_spec.js"></script>
+	<script type="text/javascript" src="../../tests/unit/editor_directives_spec.js"></script>
+	<!-- custom spec files -->
+
+  <script type="text/javascript">
+    (function() {
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+
+      var htmlReporter = new jasmine.HtmlReporter();
+
+      jasmineEnv.addReporter(htmlReporter);
+
+      jasmineEnv.specFilter = function(spec) {
+        return htmlReporter.specFilter(spec);
+      };
+
+      var currentWindowOnload = window.onload;
+
+      window.onload = function() {
+        if (currentWindowOnload) {
+          currentWindowOnload();
+        }
+        execJasmine();
+      };
+
+      function execJasmine() {
+        jasmineEnv.execute();
+      }
+
+    })();
+  </script>
+
+</head>
+
+<body>
+</body>
+</html>
