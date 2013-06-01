@@ -16,14 +16,15 @@
   <script src="javascripts/vendor/custom.modernizr.js"></script>
 
 </head>
-<body>
+<body ng-app="hfa-open-data">
 
-	<div class="row">
-		<div class="large-12 columns">
-			<h1>Hack For Athens Open Data Project</h1>
+	<div id='main' ng-controller='MainController'>
+		<div class="row">
+			<div class="large-12 columns">
+				<h1>Hack For Athens Open Data Project</h1>
+			</div>
 		</div>
 	</div>
-
 
   <script>
   document.write('<script src=' +
@@ -46,7 +47,16 @@
 	<!--<script src="javascripts/foundation/foundation.section.js"></script>-->
 	<!--<script src="javascripts/foundation/foundation.tooltips.js"></script>-->
 	<!--<script src="javascripts/foundation/foundation.topbar.js"></script>-->
+
+	<script src="javascripts/vendor/underscore.js"></script>
+	<script src="javascripts/vendor/angular/angular.js"></script>
 	
+	<!-- Angular App Files -->
+	<script src="javascripts/angular-app/app.js"></script>
+	<script src="javascripts/angular-app/routes.js"></script>
+	<script src="javascripts/angular-app/services.js"></script>
+	<script src="javascripts/angular-app/controllers.js"></script>
+	<script src="javascripts/angular-app/directives.js"></script>
   <script>
     $(document).foundation();
   </script>
