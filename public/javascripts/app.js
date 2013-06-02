@@ -1,4 +1,5 @@
       var map;
+      var districts = [];
       function initialize() {
 				var commish_info = null;
 				var commish_template = $("#commish-template").html();
@@ -12,7 +13,7 @@
         });
 
         var mapOptions = {
-          zoom: 11,
+          zoom: 12,
 					center: new google.maps.LatLng(33.92393925658786, -83.34083366016467),
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
@@ -36,6 +37,7 @@
 					district_polygon.objInfo = {
 						'district' : district.district
 					};
+          districts.push(district_polygon);
 					
 					google.maps.event.addListener(district_polygon, 'click', function(event) {
 						if(_.isEmpty(commish_info)) {
@@ -96,6 +98,48 @@
           dataType: "jsonp"
         });
 				*/
+
+        $('#geolocate').on('click', function() {
+          geolocate();
+        });
       }
 
       google.maps.event.addDomListener(window, 'load', initialize);
+
+
+      function geolocate() {
+        var address = $('#address').val();
+
+        if (address == '')
+          return;
+
+        var url =  "http://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=" + encodeURIComponent(address);
+
+        $.ajax({
+					url: url,
+          success: function(data) {
+            if (data['status'] == "OK") {
+              var lat = data['results'][0]['geometry']['location']['lat'];
+              var lng = data['results'][0]['geometry']['location']['lng'];
+
+              var your_district = _.find(districts, function(polygon) {
+                return polygon.containsLatLng(lat,lng);
+              });
+
+              if (_.isUndefined(your_district)) {
+                $('#district_results').text("It looks like you don't live in Athens Clarke County (or you found a gap in our data).");
+                alert("do you live in ACC?")
+              } else {
+                var myLatlng = new google.maps.LatLng(lat,lng);
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title: address
+                })
+                $('#district_results').text("You live in district: " + your_district.objInfo.district + ".");
+                google.maps.event.trigger(your_district, 'click');
+              }
+            }
+          }
+        });
+      }
