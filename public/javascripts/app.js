@@ -137,7 +137,6 @@
                     map: map,
                     title: address
                 })
-                $('#district_results').text("You live in district: " + your_district.objInfo.district + ".");
                 google.maps.event.trigger(your_district, 'click');
               }
             }
