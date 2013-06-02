@@ -1,6 +1,7 @@
       var map;
       function initialize() {
 				var commish_info = null;
+				var commish_template = $("#commish-template").html();
         $.ajax({
 					url: "https://communities.socrata.com/resource/acc-district-commissioners.json",
           success: function(data) {
@@ -44,6 +45,18 @@
 						var commish = _.filter(commish_info, function(record) {
 							return record.district == district_polygon.objInfo.district;
 						})[0];
+
+						commish = _.defaults(commish, {
+							education : false,
+							civic_and_community_service : false,
+							civic_and_community_service : false,
+							government_experience : false,
+							
+						});
+						commish.address = JSON.parse(commish.location_1.human_address).address;
+						console.log(commish);
+						$("#district-info").html(_.template(commish_template, commish));
+
 						//render_commish(commish);
 					});
 					
