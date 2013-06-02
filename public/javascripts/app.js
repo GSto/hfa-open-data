@@ -54,7 +54,6 @@
 							
 						});
 						commish.address = JSON.parse(commish.location_1.human_address).address;
-						console.log(commish);
 						$("#district-info").html(_.template(commish_template, commish));
 
 						//render_commish(commish);
