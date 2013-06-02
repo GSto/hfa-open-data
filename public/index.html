@@ -10,13 +10,13 @@
 		<link rel="stylesheet" href="stylesheets/app.css" />
 		<script src="javascripts/vendor/custom.modernizr.js"></script>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-    <script src="http://underscorejs.org/underscore-min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+    <script src="//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script src="//underscorejs.org/underscore-min.js"></script>
     <style>
 			#map-canvas {
-			  width: 900px;
-			  height: 600px;
+			  width: 600px;
+			  height: 400px;
       }
     </style>
 	  <script type='text/javascript' src='javascripts/hackydata.js'></script>
@@ -26,7 +26,14 @@
   <body>
 		<div class='row'>
 			<div class='large-4 columns'>
-				<strong>Click a District For More Information</strong>
+				<strong>Click a District For More Information or Search For Your Address</strong>
+
+				<form action='#'>
+					<input type='text' name='address' id='address' style='width: 250px' />
+					<button id='geolocate'>What's my district?</button>
+				</form>
+
+				<span id='district_results'></span>
 				<div id='district-info'>
 				</div>
 			</div>
@@ -58,7 +65,7 @@
 					<img src='<%= image.url %>' />
 
 					<% if(government_experience) { %>
-					<h6>Government Expierience</h6>
+					<h6>Government Experience</h6>
 					 <p>
 						 <%= government_experience %>
 					 </p>
@@ -86,12 +93,5 @@
 					<% } %>
 		</script>
 
-    <form action='#'>
-      <label for='address'>Your Address</label>
-      <input type='text' name='address' id='address' style='width: 250px' />
-      <button id='geolocate'>What's my district?</button>
-    </form>
-
-    <span id='district_results'></span>
   </body>
 </html>

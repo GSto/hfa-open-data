@@ -13,7 +13,7 @@
         });
 
         var mapOptions = {
-          zoom: 12,
+          zoom: 11,
 					center: new google.maps.LatLng(33.92393925658786, -83.34083366016467),
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
@@ -56,7 +56,6 @@
 							
 						});
 						commish.address = JSON.parse(commish.location_1.human_address).address;
-						console.log(commish);
 						$("#district-info").html(_.template(commish_template, commish));
 
 						//render_commish(commish);
