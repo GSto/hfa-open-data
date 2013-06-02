@@ -13,12 +13,4 @@ http://hackforathens.org.
    
 ### Contributors
 
-Alexandria Drake
-
-Amanda Newell
-
-Glenn Stovall
-
-Jennifer Johnston
-
-Jonathan Wallace
+Alexandria Drake, Amanda Newell, Glenn Stovall, Jennifer Johnston, Jonathan Wallace
