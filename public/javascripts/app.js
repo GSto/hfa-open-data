@@ -100,8 +100,9 @@
         });
 				*/
 
-        $('#geolocate').on('click', function() {
+        $('#geolocate').on('click', function(e) {
           geolocate();
+          e.preventDefault();  
         });
       }
 
@@ -129,7 +130,6 @@
 
               if (_.isUndefined(your_district)) {
                 $('#district_results').text("It looks like you don't live in Athens Clarke County (or you found a gap in our data).");
-                alert("do you live in ACC?")
               } else {
                 var myLatlng = new google.maps.LatLng(lat,lng);
                 var marker = new google.maps.Marker({
