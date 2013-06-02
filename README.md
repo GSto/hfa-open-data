@@ -1,6 +1,11 @@
 Web frontend to demonstrate Open APIs built during the Hack for Athens Project,
 http://hackforathens.org.
 
+### APIs
+
+ - Athens-Clarke County District Boundaries: https://communities.socrata.com/developers/docs/athens-clark-county-districts
+ - Athens-Clarke County District Commisioners: https://communities.socrata.com/developers/docs/acc-district-commissioners
+ 
 ### TODO
 
  - The current lat/lng pairs were extracted from a hand drawn KML file (using
