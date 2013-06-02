@@ -1,64 +1,100 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+  <head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Hack For Athens | Open Data Portal Demo</title>
 
-<head>
-	<meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width" />
-  <title>Foundation 4</title>
+		<link rel="stylesheet" href="stylesheets/normalize.css" />
+		<link rel="stylesheet" href="stylesheets/app.css" />
+		<script src="javascripts/vendor/custom.modernizr.js"></script>
 
-  <link rel="stylesheet" href="stylesheets/normalize.css" />
-  
-  <link rel="stylesheet" href="stylesheets/app.css" />
-  
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script src="http://underscorejs.org/underscore-min.js"></script>
+    <style>
+			#map-canvas {
+			  width: 900px;
+			  height: 600px;
+      }
+    </style>
+	  <script type='text/javascript' src='hackydata.js'></script>
+    <script type='text/javascript'>
+      var map;
+      function initialize() {
+        var mapOptions = {
+          zoom: 11,
+					//center: new google.maps.LatLng(33.90393925658786, -83.24083366016467),
+					center: new google.maps.LatLng(33.92393925658786, -83.34083366016467),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
 
-  <script src="javascripts/vendor/custom.modernizr.js"></script>
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+				_.each(hack_districts, function(district) {
+					if(_.isEmpty(district.border)) {
+						return;
+					}
+					  var district_coords = _.map(district.border, function(points) {
+							return new google.maps.LatLng(points[1],points[0]);
+						});
+          var district_polygon = new google.maps.Polygon({
+            paths: district_coords,
+            strokeColor: district.strokeColor,
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: district.fillColor,
+            fillOpacity: 0.35
+          });
+          district_polygon.setMap(map);
+				});
+					/*
+        $.ajax({
+          url: "https://communities.socrata.com/resource/athens-clark-county-georgia-districts.json",
+          success: function(data) {
 
-</head>
-<body ng-app="hfa-open-data">
+            // TODO: This can all be made into seperate functions
+            var districts = _.groupBy(data, "district");
 
-	<div id='main' ng-controller='MainController'>
-		<div class="row">
-			<div class="large-12 columns">
-				<h1>Hack For Athens Open Data Project</h1>
+              _.each(districts, function(district) {
+                var district_coords = _.map(district, function(vertex) { 
+                  return new google.maps.LatLng(vertex['location']["longitude"], vertex['location']["latitude"]);
+                });
+
+                // This is where sort the coords with .group_by based on some
+                // coord order
+
+                 // Construct the polygon
+                 district_polygon = new google.maps.Polygon({
+                   paths: district_coords,
+                   strokeColor: '#FF0000',
+                   strokeOpacity: 0.8,
+                   strokeWeight: 2,
+                   fillColor: '#FF0000',
+                   fillOpacity: 0.35
+                 });
+                
+                district_polygon.setMap(map);
+
+              });
+          },
+          jsonp: "$jsonp",
+          dataType: "jsonp"
+        });
+				*/
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+  </head>
+  <body>
+		<div class='row'>
+			<div class='large-3 columns'>
+				<h4>Click a District For More Information</h4>
+			</div>
+			<div class='large-9 columns'>
+				<div id="map-canvas"></div>
 			</div>
 		</div>
-	</div>
-
-  <script>
-  document.write('<script src=' +
-  ('__proto__' in {} ? 'javascripts/vendor/zepto' : 'javascripts/vendor/jquery') +
-  '.js><\/script>')
-  </script>
-  
-  <script src="javascripts/foundation/foundation.js"></script>
-	<!-- Additional Foundation Libraries (if needed) -->
-	<!--<script src="javascripts/foundation/foundation.alerts.js"></script>	-->
-	<!--<script src="javascripts/foundation/foundation.clearing.js"></script>-->
-	<!--<script src="javascripts/foundation/foundation.cookie.js"></script>-->
-	<!--<script src="javascripts/foundation/foundation.dropdown.js"></script>-->
-	<!--<script src="javascripts/foundation/foundation.forms.js"></script>-->
-	<!--<script src="javascripts/foundation/foundation.joyride.js"></script>-->
-	<!--<script src="javascripts/foundation/foundation.magellan.js"></script>-->
-	<!--<script src="javascripts/foundation/foundation.orbit.js"></script>-->
-	<!--<script src="javascripts/foundation/foundation.placeholder.js"></script>-->
-	<!--<script src="javascripts/foundation/foundation.reveal.js"></script>-->
-	<!--<script src="javascripts/foundation/foundation.section.js"></script>-->
-	<!--<script src="javascripts/foundation/foundation.tooltips.js"></script>-->
-	<!--<script src="javascripts/foundation/foundation.topbar.js"></script>-->
-
-	<script src="javascripts/vendor/underscore.js"></script>
-	<script src="javascripts/vendor/angular/angular.js"></script>
-	
-	<!-- Angular App Files -->
-	<script src="javascripts/angular-app/app.js"></script>
-	<script src="javascripts/angular-app/routes.js"></script>
-	<script src="javascripts/angular-app/services.js"></script>
-	<script src="javascripts/angular-app/controllers.js"></script>
-	<script src="javascripts/angular-app/directives.js"></script>
-  <script>
-    $(document).foundation();
-  </script>
-</body>
+  </body>
 </html>
