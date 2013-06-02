@@ -10,6 +10,7 @@ http://hackforathens.org.
    hackydata.js. Using the
    https://communities.socrata.com/developers/docs/athens-clark-county-districts
    API would be nice to demonstrate to others how to use the API.
+ - Add address autocomplete, coffee script example: https://gist.github.com/GSto/c219aa6ab0043a3cad9d
    
 ### Contributors
 
