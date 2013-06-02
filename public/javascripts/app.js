@@ -1,5 +1,7 @@
       var map;
       var districts = [];
+      var marker = null;
+
       function initialize() {
 				var commish_info = null;
 				var commish_template = $("#commish-template").html();
@@ -119,6 +121,7 @@
         $.ajax({
 					url: url,
           success: function(data) {
+
             if (data['status'] == "OK") {
               var lat = data['results'][0]['geometry']['location']['lat'];
               var lng = data['results'][0]['geometry']['location']['lng'];
@@ -127,15 +130,21 @@
                 return polygon.containsLatLng(lat,lng);
               });
 
+							if(!_.isNull(marker)) {
+								marker.setMap(null);
+							}
+
               if (_.isUndefined(your_district)) {
                 $('#district_results').text("It looks like you don't live in Athens Clarke County (or you found a gap in our data).");
+								$('#district-info').text(" ");
               } else {
                 var myLatlng = new google.maps.LatLng(lat,lng);
-                var marker = new google.maps.Marker({
+                 marker = new google.maps.Marker({
                     position: myLatlng,
                     map: map,
                     title: address
                 })
+                $('#district_results').text(" ");
                 google.maps.event.trigger(your_district, 'click');
               }
             }
