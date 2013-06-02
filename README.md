@@ -1,6 +1,10 @@
 Web frontend to demonstrate Open APIs built during the Hack for Athens Project,
 http://hackforathens.org.
 
+Live Demo available at
+
+http://hfa-data-portal.herokuapp.com/
+
 ### APIs
 
  - Athens-Clarke County District Boundaries: https://communities.socrata.com/developers/docs/athens-clark-county-districts
