@@ -25,3 +25,17 @@ http://hfa-data-portal.herokuapp.com/
 ### Contributors
 
 Alexandria Drake, Amanda Newell, Glenn Stovall, Jennifer Johnston, Jonathan Wallace
+
+
+### Getting Started
+ruby version is ```1.9.3```
+
+```cd``` to the root of the application
+
+Install gems
+```bundle install```
+
+Start server
+```rackup config.ru```
+
+In your browser, go to ```http://0.0.0.0:9292/```
