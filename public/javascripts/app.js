@@ -21,6 +21,9 @@
         };
 
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+        autocomplete_address('address');
+
 				_.each(hack_districts, function(district) {
 					if(_.isEmpty(district.border)) {
 						return;
@@ -151,3 +154,10 @@
           }
         });
       }
+      
+      function autocomplete_address(input_id){
+        var input = (document.getElementById(input_id));
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+        google.maps.event.addListener(autocomplete, 'place_changed', function() {});
+      };
